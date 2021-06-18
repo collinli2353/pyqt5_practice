@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidget import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 
 ## take properties of QMainWindow ##
@@ -8,16 +8,16 @@ class MyWindow(QMainWindow):
 		## Parent constructor called ##
 		super(MyWindow, self).__init__()
 		## window size with paramaters (xpos, ypos, width, height)
-		win.setGeometry(200, 200, 300, 300)
+		self.setGeometry(200, 200, 300, 300)
 
 		## window title ##
-		win.setWindowTitle("Label and Button") 
+		self.setWindowTitle("Label and Button") 
 		self.initUI()
 
 	## put all the stuff in window ##
 	def initUI(self):
 		## create label ## 
-		self.label = QtWidget.QLabel(self)
+		self.label = QtWidgets.QLabel(self)
 		self.label.setText("label here")
 		self.label.move(50, 50)
 
