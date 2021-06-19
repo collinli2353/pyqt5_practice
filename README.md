@@ -16,3 +16,5 @@ pyuic5 -x [input_file.iu] -o [output_file.py]
 ### Practice 3
 Constructed a simple GUI with label and ManuBar (shortcuts, status bar, and triggers) in 11 minutes
 
+### Practice 4
+Constructed a simple GUI with images and QPixmap and a button changing the images in 8 minutes
