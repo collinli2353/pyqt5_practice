@@ -21,8 +21,20 @@ Constructed a simple GUI with images and QPixmap and a button changing the image
 
 ### Practice 5
 Constructed a simple GUI with button activating popup box in 10 minutes
+
 The types of popup boxes include
 - warning
 - critical
 - question
 - information
+
+### Practice 6
+Constructed a simple GUI that gets image path in 20 minutes
+
+A new way of importing PyQt5.ui file:
+```python
+loadUi("practice6.ui", self)
+```
+
+*Error/Warning (caused when browse_button is pressed)*
+`libpng warning: iCCP: known incorrect sRGB profile`
