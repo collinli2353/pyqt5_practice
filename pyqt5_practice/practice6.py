@@ -20,7 +20,7 @@ class MainWindow(QDialog):
         self.browse_button.clicked.connect(self.browsefiles)
 
     def browsefiles(self):
-        fname = QFileDialog.getOpenFileName(self, "Open file", "/home/pi/Desktop/pyqt5_practice/NIFTI_image_viewer/practice6.ui")
+        fname = QFileDialog.getOpenFileName()
         self.filename.setText(fname[0])
 
 app = QApplication(sys.argv)
