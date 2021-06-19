@@ -18,3 +18,11 @@ Constructed a simple GUI with label and ManuBar (shortcuts, status bar, and trig
 
 ### Practice 4
 Constructed a simple GUI with images and QPixmap and a button changing the images in 8 minutes
+
+### Practice 5
+Constructed a simple GUI with button activating popup box in 10 minutes
+The types of popup boxes include
+- warning
+- critical
+- question
+- information
