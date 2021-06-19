@@ -12,7 +12,7 @@ Constructed a simple GUI with label and button using Qt designer in 10 mintues
 ```
 pyuic5 -x [input_file.iu] -o [output_file.py]
 ```
-
+## Day 2 (6/18)
 ### Practice 3
 Constructed a simple GUI with label and ManuBar (shortcuts, status bar, and triggers) in 11 minutes
 
