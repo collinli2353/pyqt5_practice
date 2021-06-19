@@ -41,3 +41,4 @@ loadUi("practice6.ui", self)
 
 # Extra resources
 [Online Brain Viewer](https://socr.umich.edu/HTML5/BrainViewer/)
+[Nipype Tutorial](https://miykael.github.io/nipype_tutorial/)
