@@ -38,3 +38,6 @@ loadUi("practice6.ui", self)
 
 *Error/Warning (caused when browse_button is pressed)*
 `libpng warning: iCCP: known incorrect sRGB profile`
+
+# Extra resources
+[Online Brain Viewer](https://socr.umich.edu/HTML5/BrainViewer/)
