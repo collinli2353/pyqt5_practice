@@ -1,5 +1,7 @@
 # NIFTI_image_viewer
-
+<img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig1.png" width="100%"/>
+<img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig2.png" width="100%"/>
+<img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig3.png" width="100%"/>
 
 ## 6/19
 playground.ipynb - Visualize 3D MRI Brain Scans with Python
