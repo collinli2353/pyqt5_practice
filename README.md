@@ -39,6 +39,10 @@ loadUi("practice6.ui", self)
 *Error/Warning (caused when browse_button is pressed)*
 `libpng warning: iCCP: known incorrect sRGB profile`
 
+## Day 3-4 (6/19-6/20)
+Worked on NIFTI_image_viewer which acts as a NIFTI image viewer with features of zooming in and selecting slice
+
 # Extra resources
 [Online Brain Viewer](https://socr.umich.edu/HTML5/BrainViewer/)
+
 [Nipype Tutorial](https://miykael.github.io/nipype_tutorial/)
