@@ -10,7 +10,7 @@ Constructed a simple GUI with a label and button as presented in practice1.py in
 ### Practice2
 Constructed a simple GUI with label and button using Qt designer in 10 mintues
 ```
-pyuic5 -x [input_file.iu] -o [output_file.py]
+pyuic5 -x [input_file.ui] -o [output_file.py]
 ```
 ## Day 2 (6/18)
 ### Practice 3
