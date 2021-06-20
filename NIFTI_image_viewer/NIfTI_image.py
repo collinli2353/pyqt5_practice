@@ -20,15 +20,15 @@ class converter():
 			self.image_obj = None
 
 	## returns numpy array of Nifti image ##
-	## uses qimage2ndarray to convert numpy array to QImage ##
+	## uses qimage2ndarray to convert numpy array to QImage##
 	## this can be done without this library ##
 	def toNumpyArray(self, path=None, Nifti_image=None):
 		if(Nifti_image):
-			return Nifti_image.get_fdata()
+			return Nifti_image.get_fdata() / Nifti_image.get_fdata().max() * 255
 		elif(path):
-			return nib.load(path).get_fdata
+			return nib.load(path).get_fdata() / nib.load(path).get_fdata().max() * 255
 		else:
-			return self.image_obj.get_fdata()
+			return self.image_obj.get_fdata() / self.image_obj.get_fdata().max() * 255
 
 	## returns QImage of Nifti image ##
 	def toQImageX(self, np_arr=None, section=100):
@@ -38,9 +38,6 @@ class converter():
 			numpyImage = self.toNumpyArray()
 		numpyImage = numpyImage[section, :, :]
 
-		## crucial step to normalize image ##
-		if(numpyImage.max() > 255):
-			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 	def toQImageY(self, np_arr=None, section=100):
@@ -50,9 +47,6 @@ class converter():
 			numpyImage = self.toNumpyArray()
 		numpyImage = numpyImage[:, section, :]
 
-		## crucial step to normalize image ##
-		if(numpyImage.max() > 255):
-			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 	def toQImageZ(self, np_arr=None, section=100):
@@ -62,9 +56,6 @@ class converter():
 			numpyImage = self.toNumpyArray()
 		numpyImage = numpyImage[:, :, section]
 
-		## crucial step to normalize image ##
-		if(numpyImage.max() > 255):
-			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 ## testing ##
