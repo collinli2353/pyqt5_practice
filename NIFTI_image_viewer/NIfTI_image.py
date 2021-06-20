@@ -6,7 +6,8 @@ import qimage2ndarray
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage
 import sys
-
+from PIL import Image as im
+from PIL.ImageQt import ImageQt
 
 ## will convert Nifti images to numpy arrays ##
 class converter():
@@ -35,7 +36,11 @@ class converter():
 			numpyImage = self.toNumpyArray(np_arr)
 		else:
 			numpyImage = self.toNumpyArray()
-		numpyImage = numpyImage[:, section, :]
+		numpyImage = numpyImage[section, :, :]
+
+		## crucial step to normalize image ##
+		if(numpyImage.max() > 255):
+			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 	def toQImageY(self, np_arr=None, section=100):
@@ -44,6 +49,10 @@ class converter():
 		else:
 			numpyImage = self.toNumpyArray()
 		numpyImage = numpyImage[:, section, :]
+
+		## crucial step to normalize image ##
+		if(numpyImage.max() > 255):
+			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 	def toQImageZ(self, np_arr=None, section=100):
@@ -52,26 +61,56 @@ class converter():
 		else:
 			numpyImage = self.toNumpyArray()
 		numpyImage = numpyImage[:, :, section]
+
+		## crucial step to normalize image ##
+		if(numpyImage.max() > 255):
+			numpyImage /= numpyImage.max()/255.0
 		return qimage2ndarray.array2qimage(numpyImage)
 
 ## testing ##
 if __name__ == "__main__":
+	
+	if(False):
+		img = im.open('test.jpg')
+		numpydata = np.asarray(img)
+		numpydata = numpydata[:,:,2]
+		print(numpydata[0,0])
+
+		image_obj_QImage = qimage2ndarray.array2qimage(numpydata)
+		
+		print(image_obj_QImage)
+
+
+		app = QtWidgets.QApplication(sys.argv)
+		label_imageDisplay = QtWidgets.QLabel()
+		label_imageDisplay.setPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(image_obj_QImage)))
+		label_imageDisplay.setAlignment(QtCore.Qt.AlignCenter)
+		label_imageDisplay.setScaledContents(True)
+		label_imageDisplay.setMinimumSize(10,10)
+
+		label_imageDisplay.show()
+		sys.exit(app.exec_())
+	
+
+
 	imag_obj = converter(path="./NIfTI images/training01_01_mprage_pp.nii.gz")
 	image_obj_QImage = imag_obj.toQImageX()
 	print(type(image_obj_QImage))
 	image_obj_npArr = imag_obj.toNumpyArray()
-	print(image_obj_npArr.shape)
-	'''
-	plt.imshow(image_obj_npArr[:, :, 100], cmap='gray')
+	print(image_obj_npArr[100,50,50])
+	
+	plt.imshow(image_obj_npArr[100, :, :])
 	plt.axis('off');
-	plt.show()
-	'''
+	#plt.show()
+	
+	print(image_obj_QImage)
+
 	app = QtWidgets.QApplication(sys.argv)
 	label_imageDisplay = QtWidgets.QLabel()
 	label_imageDisplay.setPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(image_obj_QImage)))
 	label_imageDisplay.setAlignment(QtCore.Qt.AlignCenter)
 	label_imageDisplay.setScaledContents(True)
-	label_imageDisplay.setMinimumSize(1,1)
+	label_imageDisplay.setMinimumSize(10,10)
 
 	label_imageDisplay.show()
 	sys.exit(app.exec_())
