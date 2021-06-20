@@ -3,8 +3,8 @@ from NIfTI_image import converter
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-import PyQt5.QtWidgets as QtWidgets
 from PyQt5.uic import loadUi
+from PyQt5.QtGui import *
 
 
 class Main(Main_Window.Ui_MainWindow):
@@ -16,6 +16,8 @@ class Main(Main_Window.Ui_MainWindow):
 		self.graphicsView_2.setScene(QGraphicsScene())
 		self.graphicsView_3.setScene(QGraphicsScene())
 		self.graphicsView_4.setScene(QGraphicsScene())
+
+		self.graphicsView_1.wheelEvent(self.event)
 
 		## QGraphicsPixmapItem ##
 		self.image = [None, None, None, None]
@@ -49,6 +51,8 @@ class Main(Main_Window.Ui_MainWindow):
 				self.image[0].setPixmap(convertedX)
 			else:
 				self.image[0] = self.graphicsView_1.scene().addPixmap(convertedX)
+
+
 			self.image[0].setFlag(QGraphicsItem.ItemIsMovable)
 		
 		if(Y):
@@ -80,9 +84,9 @@ class Main(Main_Window.Ui_MainWindow):
 		elif(slider == 2):
 			self.show_images(Z=value)
 
-	## mouse press for zoom ##
-	def mousePressEvent(self, event):
-		pass
+	## wheel event for zoom ##
+	def event(self, event: QWheelEvent):
+		print("fda")
 
 
 
