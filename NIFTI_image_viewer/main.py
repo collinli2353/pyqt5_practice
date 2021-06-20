@@ -2,7 +2,8 @@ import Main_Window
 from NIfTI_image import converter
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog
+from PyQt5.QtWidgets import *
+import PyQt5.QtWidgets as QtWidgets
 from PyQt5.uic import loadUi
 
 
@@ -10,12 +11,22 @@ class Main(Main_Window.Ui_MainWindow):
 	def __init__(self, MainWindow):
 		self.setupUi(MainWindow)
 
+		## QGraphicsView scenes (use .scene() to get scene) ##
+		self.graphicsView_1.setScene(QGraphicsScene())
+		self.graphicsView_2.setScene(QGraphicsScene())
+		self.graphicsView_3.setScene(QGraphicsScene())
+		self.graphicsView_4.setScene(QGraphicsScene())
+
+		## QGraphicsPixmapItem ##
+		self.image = [None, None, None, None]
+
 		## triggers ##
 		self.actionOpen.triggered.connect(self.browse)
 
 		self.horizontalSlider_1.valueChanged.connect(lambda value: self.changeValue(value, slider=0))
 		self.horizontalSlider_2.valueChanged.connect(lambda value: self.changeValue(value, slider=1))
 		self.horizontalSlider_3.valueChanged.connect(lambda value: self.changeValue(value, slider=2))
+
 
 	## gets file location ##
 	def browse(self):
@@ -33,17 +44,31 @@ class Main(Main_Window.Ui_MainWindow):
 	def show_images(self, X = None, Y = None, Z = None):
 		if(X):
 			self.X_image = self.image_obj_converter.toQImageX(section = X)
-			convertedX = QWidgets.QGraphicsPixmapItem(QtGui.QPixmap(QtGui.QPixmap.fromImage(self.X_image)))
-			self.graphicsView_1.addItem(convertedX)
-		'''
+			convertedX = QtGui.QPixmap.fromImage(self.X_image)
+			if(self.image[0]):
+				self.image[0].setPixmap(convertedX)
+			else:
+				self.image[0] = self.graphicsView_1.scene().addPixmap(convertedX)
+			self.image[0].setFlag(QGraphicsItem.ItemIsMovable)
+		
 		if(Y):
-			Y_image = self.image_obj_converter.toQImageY(section = Y)
-			self.graphicsView_2.addPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Y_image)))
+			self.Y_image = self.image_obj_converter.toQImageY(section = Y)
+			convertedY = QtGui.QPixmap.fromImage(self.Y_image)
+			if(self.image[1]):
+				self.image[1].setPixmap(convertedY)
+			else:
+				self.image[1] = self.graphicsView_2.scene().addPixmap(convertedY)
+			self.image[1].setFlag(QGraphicsItem.ItemIsMovable)
 		
 		if(Z):
-			Z_image = self.image_obj_converter.toQImageZ(section = Z)
-			self.graphicsView_3.addPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Z_image)))
-		'''
+			self.Z_image = self.image_obj_converter.toQImageZ(section = Z)
+			convertedZ = QtGui.QPixmap.fromImage(self.Z_image)
+			if(self.image[3]):
+				self.image[3].setPixmap(convertedZ)
+			else:
+				self.image[3] = self.graphicsView_3.scene().addPixmap(convertedZ)
+			self.image[3].setFlag(QGraphicsItem.ItemIsMovable)
+		
 
 	## slider value changed ##
 	def changeValue(self, value, slider):
