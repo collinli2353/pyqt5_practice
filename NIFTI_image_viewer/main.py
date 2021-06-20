@@ -1,5 +1,6 @@
 import Main_Window
 from NIfTI_image import converter
+from QGS_sections import QGraphicsView_image
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
@@ -11,13 +12,22 @@ class Main(Main_Window.Ui_MainWindow):
 	def __init__(self, MainWindow):
 		self.setupUi(MainWindow)
 
-		## QGraphicsView scenes (use .scene() to get scene) ##
-		self.graphicsView_1.setScene(QGraphicsScene())
-		self.graphicsView_2.setScene(QGraphicsScene())
-		self.graphicsView_3.setScene(QGraphicsScene())
-		self.graphicsView_4.setScene(QGraphicsScene())
+		## COPIED FROM MAIN_WINDOW.py ##
+		self.graphicsView_1 = QGraphicsView_image(self.centralwidget)
+		self.graphicsView_1.setGeometry(QtCore.QRect(460, 10, 351, 341))
+		self.graphicsView_1.setObjectName("graphicsView_1")
+		self.graphicsView_2 = QGraphicsView_image(self.centralwidget)
+		self.graphicsView_2.setGeometry(QtCore.QRect(830, 10, 351, 341))
+		self.graphicsView_2.setObjectName("graphicsView_2")
+		self.graphicsView_3 = QGraphicsView_image(self.centralwidget)
+		self.graphicsView_3.setGeometry(QtCore.QRect(460, 390, 351, 341))
+		self.graphicsView_3.setObjectName("graphicsView_3")
+		self.graphicsView_4 = QGraphicsView_image(self.centralwidget)
+		self.graphicsView_4.setGeometry(QtCore.QRect(830, 390, 351, 341))
+		self.graphicsView_4.setObjectName("graphicsView_4")
 
-		self.graphicsView_1.wheelEvent(self.event)
+		## QGraphicsView ##
+		self.graphicsView = [self.graphicsView_1, self.graphicsView_2, self.graphicsView_3, self.graphicsView_4]
 
 		## QGraphicsPixmapItem ##
 		self.image = [None, None, None, None]
@@ -47,31 +57,17 @@ class Main(Main_Window.Ui_MainWindow):
 		if(X):
 			self.X_image = self.image_obj_converter.toQImageX(section = X)
 			convertedX = QtGui.QPixmap.fromImage(self.X_image)
-			if(self.image[0]):
-				self.image[0].setPixmap(convertedX)
-			else:
-				self.image[0] = self.graphicsView_1.scene().addPixmap(convertedX)
-
-
-			self.image[0].setFlag(QGraphicsItem.ItemIsMovable)
+			self.graphicsView[0].setPhoto(convertedX)
 		
 		if(Y):
 			self.Y_image = self.image_obj_converter.toQImageY(section = Y)
 			convertedY = QtGui.QPixmap.fromImage(self.Y_image)
-			if(self.image[1]):
-				self.image[1].setPixmap(convertedY)
-			else:
-				self.image[1] = self.graphicsView_2.scene().addPixmap(convertedY)
-			self.image[1].setFlag(QGraphicsItem.ItemIsMovable)
+			self.graphicsView[1].setPhoto(convertedY)
 		
 		if(Z):
 			self.Z_image = self.image_obj_converter.toQImageZ(section = Z)
 			convertedZ = QtGui.QPixmap.fromImage(self.Z_image)
-			if(self.image[3]):
-				self.image[3].setPixmap(convertedZ)
-			else:
-				self.image[3] = self.graphicsView_3.scene().addPixmap(convertedZ)
-			self.image[3].setFlag(QGraphicsItem.ItemIsMovable)
+			self.graphicsView[2].setPhoto(convertedZ)
 		
 
 	## slider value changed ##
@@ -84,16 +80,12 @@ class Main(Main_Window.Ui_MainWindow):
 		elif(slider == 2):
 			self.show_images(Z=value)
 
-	## wheel event for zoom ##
-	def event(self, event: QWheelEvent):
-		print("fda")
-
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Main(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+	import sys
+	app = QtWidgets.QApplication(sys.argv)
+	MainWindow = QtWidgets.QMainWindow()
+	ui = Main(MainWindow)
+	MainWindow.show()
+	sys.exit(app.exec_())

@@ -1,3 +1,5 @@
+## Taken from https://stackoverflow.com/questions/35508711/how-to-enable-pan-and-zoom-in-a-qgraphicsview ##
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class PhotoViewer(QtWidgets.QGraphicsView):

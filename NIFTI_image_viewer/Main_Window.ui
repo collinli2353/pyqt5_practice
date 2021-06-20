@@ -99,6 +99,9 @@
       <height>341</height>
      </rect>
     </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
+    </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_2">
     <property name="geometry">
@@ -108,6 +111,9 @@
       <width>351</width>
       <height>341</height>
      </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_3">
@@ -119,6 +125,9 @@
       <height>341</height>
      </rect>
     </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
+    </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_4">
     <property name="geometry">
@@ -128,6 +137,9 @@
       <width>351</width>
       <height>341</height>
      </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
     </property>
    </widget>
    <zorder>graphicsView_1</zorder>
@@ -145,7 +157,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>22</height>
+     <height>32</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
