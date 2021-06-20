@@ -1,4 +1,10 @@
 # NIFTI_image_viewer
+Python libraries used
+- numpy
+- nibabel
+- qimage2ndarray
+- PyQt5
+
 <img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig1.png" width="50%"/>
 <img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig2.png" width="50%"/>
 <img src="https://github.com/collinli2022/pyqt5_practice/blob/main/NIFTI_image_viewer/figs/Fig3.png" width="50%"/>
