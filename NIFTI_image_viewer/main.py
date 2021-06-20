@@ -32,16 +32,18 @@ class Main(Main_Window.Ui_MainWindow):
 
 	def show_images(self, X = None, Y = None, Z = None):
 		if(X):
-			X_image = self.image_obj_converter.toQImageX(section = X)
-			self.label_1.setPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(X_image)))
-
+			self.X_image = self.image_obj_converter.toQImageX(section = X)
+			convertedX = QWidgets.QGraphicsPixmapItem(QtGui.QPixmap(QtGui.QPixmap.fromImage(self.X_image)))
+			self.graphicsView_1.addItem(convertedX)
+		'''
 		if(Y):
 			Y_image = self.image_obj_converter.toQImageY(section = Y)
-			self.label_2.setPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Y_image)))
+			self.graphicsView_2.addPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Y_image)))
 		
 		if(Z):
 			Z_image = self.image_obj_converter.toQImageZ(section = Z)
-			self.label_3.setPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Z_image)))
+			self.graphicsView_3.addPixmap(QtGui.QPixmap(QtGui.QPixmap.fromImage(Z_image)))
+		'''
 
 	## slider value changed ##
 	def changeValue(self, value, slider):
@@ -52,6 +54,10 @@ class Main(Main_Window.Ui_MainWindow):
 			self.show_images(Y=value)
 		elif(slider == 2):
 			self.show_images(Z=value)
+
+	## mouse press for zoom ##
+	def mousePressEvent(self, event):
+		pass
 
 
 
