@@ -1,5 +1,5 @@
 import Main_Window
-from NIfTI_image import converter
+from NIfTI_image import NIFTI_converter
 from QGS_sections import QGraphicsView_image
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
 
-
+## implement MainWindowUI ##
 class Main(Main_Window.Ui_MainWindow):
 	def __init__(self, MainWindow):
 		self.setupUi(MainWindow)
@@ -33,26 +33,29 @@ class Main(Main_Window.Ui_MainWindow):
 		self.image = [None, None, None, None]
 
 		## triggers ##
+		### Open file trigger ###
 		self.actionOpen.triggered.connect(self.browse)
 
+		### Horizontal Slider trigger ###
 		self.horizontalSlider_1.valueChanged.connect(lambda value: self.changeValue(value, slider=0))
 		self.horizontalSlider_2.valueChanged.connect(lambda value: self.changeValue(value, slider=1))
 		self.horizontalSlider_3.valueChanged.connect(lambda value: self.changeValue(value, slider=2))
 
 
-	## gets file location ##
+	## Opens finder to get NIFTI image path ##
 	def browse(self):
 		## set filter to open only files ending in specific types ##
 		filter = "nii(*.nii);nii.gz(*nii.gz)"
 		fname = QFileDialog.getOpenFileName(filter=filter)
 
-		## will store the numpy arrays of the image
-		self.image_obj_converter = converter(path = fname[0])
+		## will store the numpy arrays of the image using the NIfTI_image.converter class##
+		self.image_obj_converter = NIFTI_converter(path = fname[0])
 		self.images_npArray = self.image_obj_converter.toNumpyArray()
 
 		## display images ##
 		self.show_images(X = 100, Y = 100, Z = 100)
 
+	## Displays X_image, Y_image, Z_image based on slice ##
 	def show_images(self, X = None, Y = None, Z = None):
 		if(X):
 			self.X_image = self.image_obj_converter.toQImageX(section = X)
@@ -72,6 +75,7 @@ class Main(Main_Window.Ui_MainWindow):
 
 	## slider value changed ##
 	def changeValue(self, value, slider):
+		## Scale Value ##
 		value = int(self.images_npArray.shape[slider]*(value/100))
 		if(slider == 0):
 			self.show_images(X=value)

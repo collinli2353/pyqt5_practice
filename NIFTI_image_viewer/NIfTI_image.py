@@ -10,7 +10,7 @@ from PIL import Image as im
 from PIL.ImageQt import ImageQt
 
 ## will convert Nifti images to numpy arrays ##
-class converter():
+class NIFTI_converter():
 	def __init__(self, path="", Nifti_image=None):
 		if(Nifti_image):
 			self.image_obj = Nifti_image
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 	
 
 
-	imag_obj = converter(path="./NIfTI images/training01_01_mprage_pp.nii.gz")
+	imag_obj = NIFTI_converter(path="./NIfTI images/training01_01_mprage_pp.nii.gz")
 	image_obj_QImage = imag_obj.toQImageX()
 	print(type(image_obj_QImage))
 	image_obj_npArr = imag_obj.toNumpyArray()
